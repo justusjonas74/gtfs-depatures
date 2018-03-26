@@ -1,0 +1,16 @@
+{
+  "mongoUrl": "mongodb://0.0.0.0:27017/data",
+  "agencies": [
+    {
+      "agency_key": "AGENCY1",
+      "url": "http://www.agency.de/GTFS.zip",
+      "exclude": [
+        "shapes"
+      ]
+    },
+    {
+      "agency_key": "AGENCY2",
+      "path": "GTFS.zip"
+    }
+  ]
+}
