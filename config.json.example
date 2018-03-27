@@ -1,16 +1,18 @@
 {
-  "mongoUrl": "mongodb://0.0.0.0:27017/data",
-  "agencies": [
-    {
-      "agency_key": "AGENCY1",
-      "url": "http://www.agency.de/GTFS.zip",
-      "exclude": [
-        "shapes"
-      ]
-    },
-    {
-      "agency_key": "AGENCY2",
-      "path": "GTFS.zip"
-    }
-  ]
+  "mongoUrl": {
+    "production": "mongodb://localhost:27017/prod",
+    "development": "mongodb://localhost:27017/dev",
+    "test": "mongodb://localhost:27017/test"
+  },
+  "agencies": [{
+    "agency_key": "BESTAGENCY",
+    "url": "http://www.urlofbestagency.com/GTFS.zip",
+    "exclude": [
+      "shapes"
+    ]
+  },
+  {
+    "agency_key": "2NDBESTAGENCY",
+    "path": "GTFS.zip"
+  }]
 }
