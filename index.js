@@ -4,7 +4,7 @@ const app = express()
 const mongoose = require('mongoose');
 
 // TODO LIST
-// Create Index StopTime. stop_id, departure_time, arrival_time, stop_name
+// Create Index StopTime.stop_id, StopTime.departure_time, StopTime.arrival_time, Stop.stop_name, Stop.parrent_station
 
 // CONNECT THE DATABASE
 const config = require('./config.json');
