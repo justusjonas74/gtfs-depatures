@@ -11,6 +11,7 @@ require('./lib/db').connectDatabase(mongoose, config)
 require('./lib/server').server(app)
 
 // TODO LIST
+// EXCLUDE TEST DATA
 // Create Index StopTime.stop_id, StopTime.departure_time, StopTime.arrival_time, Stop.stop_name, Stop.parrent_station
 // Create a wildcard route for all unsupported requests
 // Create a version for the api
