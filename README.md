@@ -1,5 +1,8 @@
 # GTFS Departures
 
+[![Build Status](https://travis-ci.org/justusjonas74/gtfs-depatures.svg?branch=master)](https://travis-ci.org/justusjonas74/gtfs-depatures)
+[![Coverage Status](https://coveralls.io/repos/github/justusjonas74/gtfs-depatures/badge.svg?branch=master)](https://coveralls.io/github/justusjonas74/gtfs-depatures?branch=master)
+
 A JSON API backend based on [GTFS](https:*developers.google.com/transit/gtfs/) data and [Express.js](https://expressjs.com). 
 
 ## Getting started 
@@ -46,7 +49,7 @@ Search for a stop by name. Example response body for GET request `/api/stops/sea
 ```
 
 
-### ``GET /api/stops/[:id]`
+### `GET /api/stops/[:id]`
 Get details of a specific stop and all related `child stops`.  Example response body for GET request `/api/stops/ctsmar`:
 
 ```json 
@@ -90,7 +93,7 @@ Get details of a specific stop and all related `child stops`.  Example response 
 ]
 ```
 
-### ``GET /api/stops/[:id]/departures`
+### `GET /api/stops/[:id]/departures`
 Get all departures of a specific stop and all related `child stops` within the next hour. Example response body for GET request `/api/stops/ctsmar/departures`:
 ```json
 [
