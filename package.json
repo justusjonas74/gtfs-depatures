@@ -6,7 +6,7 @@
   "scripts": {
     "standard-fix": "standard --fix",
     "test": "standard && NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report lcov -- -R spec",
-    "import": "gtfs-import",
+    "import": "node import.js",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "standard": "standard --fix"
   },
