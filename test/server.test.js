@@ -1,8 +1,6 @@
 // During the test the env variable is set to test
 process.env.NODE_ENV = 'test'
 
-let server = require('../lib/server')
-
 // Require the dev-dependencies
 let gtfs = require('gtfs')
 let mongoose = require('mongoose')
@@ -10,10 +8,12 @@ let path = require('path')
 let chai = require('chai')
 let chaiAsPromised = require('chai-as-promised')
 
-// let chaiHttp = require('chai-http')
+let chaiHttp = require('chai-http')
 chai.use(chaiAsPromised)
 chai.should()
-// chai.use(chaiHttp);
+chai.use(chaiHttp)
+
+let app = require('../lib/server')
 
 // TEST DATA
 const agenciesFixturesLocal = [{
@@ -39,24 +39,32 @@ describe('server.js', () => {
   })
 
   describe('GET /api/stops/search', () => {
-    it('should return an array of stops if search term is given', () => {
-      server.should.not.be.empty()
+    it('should return an array of stops if search term is given', (done) => {
+      chai.request(app)
+        .get('/api/stops/search')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.a('array')
+          // res.body.length.should.be.eql(0);
+          done()
+        })
     })
 
-    it('should return an array of stops if search term is not given', () => {
-      server.should.not.be.empty()
-    })
+    // it('should return an array of stops if search term is not given', () => {
+    //   server.should.not.be.empty()
+    // })
   })
 
   describe('GET /api/stops/:id/', () => {
-    it('should ', () => {
-      server.should.not.be.empty()
-    })
+    // it('should ', () => {
+    //   server.should.not.be.empty()
+    // })
   })
 
   describe('GET /api/stops/:id/departures', () => {
-    it('should ', () => {
-      server.should.not.be.empty()
-    })
+    // it('should ', () => {
+    //   server.should.not.be.empty()
+    // })
   })
 })
