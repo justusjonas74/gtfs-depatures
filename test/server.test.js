@@ -12,6 +12,7 @@ let chaiHttp = require('chai-http')
 chai.use(chaiAsPromised)
 chai.should()
 chai.use(chaiHttp)
+chai.use(require('chai-things'))
 
 let app = require('../lib/server')
 
@@ -34,19 +35,31 @@ describe('server.js', () => {
   })
 
   after(async () => {
-    // await mongoose.connection.db.dropDatabase()
+    await mongoose.connection.db.dropDatabase()
     await mongoose.connection.close()
   })
 
   describe('GET /api/stops/search', () => {
-    it('should return an array of stops if search term is given', (done) => {
+    it('should return an empty array if no search term is given', (done) => {
       chai.request(app)
         .get('/api/stops/search')
         .end((err, res) => {
           if (err) { console.log(err) }
           res.should.have.status(200)
           res.body.should.be.a('array')
-          // res.body.length.should.be.eql(0);
+          res.body.length.should.be.eql(0)
+          done()
+        })
+    })
+
+    it('should return an array of stops if search term is given', (done) => {
+      chai.request(app)
+        .get('/api/stops/search?term=San+Antonio+Caltrain')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.a('array')
+          res.body.should.contain.an.item.with.property('stop_name', 'San Antonio Caltrain')
           done()
         })
     })
@@ -57,14 +70,53 @@ describe('server.js', () => {
   })
 
   describe('GET /api/stops/:id/', () => {
-    // it('should ', () => {
-    //   server.should.not.be.empty()
-    // })
+    it('should return the details of a stop if id exists ', (done) => {
+      chai.request(app)
+        .get('/api/stops/ctsa')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.an('array')
+          res.body.should.contain.an.item.with.property('stop_name', 'San Antonio Caltrain')
+          done()
+        })
+    })
+    it('should return an empty array if id not exists ', (done) => {
+      chai.request(app)
+        .get('/api/stops/ctsaasdsaddsad')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.an('array')
+          res.body.length.should.be.eql(0)
+          done()
+        })
+    })
   })
 
   describe('GET /api/stops/:id/departures', () => {
-    // it('should ', () => {
-    //   server.should.not.be.empty()
-    // })
+    it('should return the the departures of a stop if id exists', (done) => {
+      // TODO: Add a time point and a offset to the request, because maybe there's no departure actually and the test will fail
+      chai.request(app)
+        .get('/api/stops/ctsa/departures')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.an('array')
+          res.body.should.contain.an.item.with.property('departure_time')
+          done()
+        })
+    })
+    it('should return an empty array  if id exists', (done) => {
+      chai.request(app)
+        .get('/api/stops/ctsaasdasfddfsd/departures')
+        .end((err, res) => {
+          if (err) { console.log(err) }
+          res.should.have.status(200)
+          res.body.should.be.an('array')
+          res.body.length.should.be.eql(0)
+          done()
+        })
+    })
   })
 })
