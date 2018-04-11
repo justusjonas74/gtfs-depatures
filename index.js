@@ -16,7 +16,10 @@ app.listen(port).on('error', function (err) { console.log(err) })
 console.log(`App listening on port: ${port}`)
 
 // TODO LIST
-// EXCLUDE TEST DATA
+// Check how to test error handling. It's not possible for me to produce an err
+// Exclude test data from test files (BE D-R-Y NOT W-E-T)
+// Add Option "includeChilds" to all route
+// Add Option "time" and "offset" to the route ../../departures
 // Create Index StopTime.stop_id, StopTime.departure_time, StopTime.arrival_time, Stop.stop_name, Stop.parrent_station
 // Create a wildcard route for all unsupported requests
 // Create a version for the api
