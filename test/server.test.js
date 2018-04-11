@@ -22,12 +22,14 @@ const agenciesFixturesLocal = [{
   path: path.join(__dirname, 'fixture/caltrain_20160406.zip')
 }]
 
-let config = require('../config.json')
+var config = {}
+const getEnvMongoUrl = require('../lib/getEnvMongoUrl')
+const mongoUrl = getEnvMongoUrl()
 
 describe('server.js', () => {
   // Connect DB
   before(async () => {
-    await require('../lib/db').connectDatabase(mongoose, config)
+    await mongoose.connect(mongoUrl)
     await mongoose.connection.db.dropDatabase()
     config.verbose = false
     config.agencies = agenciesFixturesLocal

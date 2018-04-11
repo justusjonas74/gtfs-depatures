@@ -3,10 +3,9 @@ const mongoose = require('mongoose')
 
 // LOCAL DEPENDENCIES
 const getEnvMongoUrl = require('./lib/getEnvMongoUrl')
-const config = require('./config.json')
 
 // CONNECT THE DATABASE
-const mongoUrl = getEnvMongoUrl(config)
+const mongoUrl = getEnvMongoUrl()
 mongoose.connect(mongoUrl)
 
 // LOAD AND CONFIG SERVER

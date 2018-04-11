@@ -16,18 +16,20 @@ chai.use(chaiAsPromised)
 chai.should()
 // chai.use(chaiHttp);
 
-let config = require('../config.json')
-
 // TEST DATA
 const agenciesFixturesLocal = [{
   agency_key: 'caltrain',
   path: path.join(__dirname, 'fixture/caltrain_20160406.zip')
 }]
 
+var config = {}
+const getEnvMongoUrl = require('../lib/getEnvMongoUrl')
+const mongoUrl = getEnvMongoUrl()
+
 describe('querries.js', () => {
   // Connect DB
   before(async () => {
-    await require('../lib/db').connectDatabase(mongoose, config)
+    await mongoose.connect(mongoUrl)
     await mongoose.connection.db.dropDatabase()
     config.verbose = false
     config.agencies = agenciesFixturesLocal
