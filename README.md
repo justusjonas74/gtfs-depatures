@@ -7,7 +7,7 @@ A JSON API backend based on [GTFS](https:*developers.google.com/transit/gtfs/) d
 
 ## Getting started 
 
-1. You need [node.js](https://nodejs.org/) and [mongoDB](https://www.mongodb.com/) installed.
+1. You need [node.js](https://nodejs.org/) (>= version 8) and [mongoDB](https://www.mongodb.com/) installed.
 
 2. Clone and install this repo (npm version planned):
     ```bash
