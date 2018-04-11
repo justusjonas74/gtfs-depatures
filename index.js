@@ -1,14 +1,19 @@
 // DEPENDENCIES
-const express = require('express')
-const app = express()
+// const express = require('express')
+// const app = express()
 const mongoose = require('mongoose')
 
 // CONNECT THE DATABASE
-const config = require('../config.json')
+const config = require('./config.json')
 require('./lib/db').connectDatabase(mongoose, config)
 
+// SERVER
+const app = require('./lib/server')
+
 // START THE SERVER
-require('./lib/server').server(app)
+const port = process.env.PORT || 5000
+app.listen(port).on('error', function (err) { console.log(err) })
+console.log(`App listening on port: ${port}`)
 
 // TODO LIST
 // EXCLUDE TEST DATA
