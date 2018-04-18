@@ -1,4 +1,5 @@
 # SPECIFIC
+client/build
 data/**/*
 config.json
 
